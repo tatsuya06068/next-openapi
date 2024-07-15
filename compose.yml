@@ -1,0 +1,25 @@
+services:
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    tty: true
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./openapi/openapi.yml:/openapi.yml
+    environment:
+      - SWAGGER_JSON=/openapi.yml
+  front:
+    build:
+      context: ./container/front/
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+      - "4010:4010" # prisma
+      - "6006:6006" # storybook
+    tty: true
+    volumes:
+      - ./src:/app
+      - ./openapi:/app/openapi
+      - node_modules:/app/node_modules
+volumes:
+  node_modules:

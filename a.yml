@@ -1,0 +1,153 @@
+openapi: "3.0.3"
+
+info:
+  title: "Fuji Blog Server"
+  description: |
+    # Feature
+    - GET blog
+    - POST blog
+  license:
+    name: "MIT License"
+    url: "https://opensource.org/license/MIT"
+  version: "1.0.0"
+
+servers:
+  - url: "http://localhost:{port}"
+    description: "local development"
+    variables:
+      port:
+        enum: ["3000", "8080"]
+        default: "3000"
+
+tags:
+  - name: blogs
+    description: "Blog Content Operation"
+
+paths:
+  "/blogs":
+    get:
+      summary: "Get Blog resources"
+      description: "(description): Get Blog resources"
+      tags: ["blogs"]
+      deprecated: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    title:
+                      type: string
+                    content:
+                      type: string
+                    created_at:
+                      type: string
+                      format: date-time
+                    updated_at:
+                      type: string
+                      format: date-time
+              example:
+                - id: 1
+                  title: "OpenAPI + Prismでmock server建てた話"
+                  content: "本日はOpenAPIとPrismを使用したMock Serverの建て方について話して行こうと思います。"
+                  created_at: "2021-08-25 13:30:25"
+                  updated_at: "2021-08-25 13:30:25"
+          description: "success operation"
+        "401":
+          $ref: "./errorResponses.yml#/components/responses/401-Unauthenticated"
+
+    post:
+      summary: "Post blog"
+      description: "(description): Post blog"
+      tags: ["blogs"]
+      deprecated: false
+      parameters:
+        - name: X-Api-Key
+          in: header
+          description: "Request user's indenfiger"
+          schema: { type: string }
+          example: "XXXX-XXXX-XXXX-XXXX"
+        - name: token
+          in: cookie
+          description: "One time token"
+          schema: { type: string }
+          example: "XXXX-XXXX-XXXX-XXXX"
+      requestBody:
+        description: "Content of review"
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                title:
+                  type: string
+                content:
+                  type: string
+                created_at:
+                  type: string
+                  format: date-time
+                updated_at:
+                  type: string
+                  format: date-time
+            example:
+              title: "OpenAPI + Prismでmock server建てた話"
+              content: "本日はOpenAPIとPrismを使用したMock Serverの建て方について話して行こうと思います。"
+              created_at: "2021-08-25 13:30:25"
+              updated_at: "2021-08-25 13:30:25"
+      responses:
+        "201":
+          description: "success operation"
+          headers:
+            location:
+              description: "New URL of created review"
+              schema: { type: string, format: url }
+        "400":
+          $ref: "./errorResponses.yml#/components/responses/400-BadRequest"
+        "401":
+          $ref: "./errorResponses.yml#/components/responses/401-Unauthenticated"
+
+  "/blogs/{blogId}":
+    parameters:
+      - name: blogId
+        in: path
+        description: "Blog idenfifer"
+        required: true
+        schema: { type: string }
+        example: "1"
+
+    get:
+      summary: "Get specified Blog resource"
+      description: "(description): Get specifed Blog resource"
+      tags: ["blogs"]
+      deprecated: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  content:
+                    type: string
+                  created_at:
+                    type: string
+                    format: date-time
+                  updated_at:
+                    type: string
+                    format: date-time
+                example:
+                  id: 1
+                  title: "OpenAPI + Prismでmock server建てた話"
+                  content: "本日はOpenAPIとPrismを使用したMock Serverの建て方について話して行こうと思います。"
+                  created_at: "2021-08-25 13:30:25"
+                  updated_at: "2021-08-25 13:30:25"
+          description: "success operation"
