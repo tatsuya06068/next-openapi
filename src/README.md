@@ -61,6 +61,8 @@ prism mock ./openapi.yml -h 0.0.0.0
 
 ## story book 
 
+npx sb init
+
 apk add xdg-utils
 
 

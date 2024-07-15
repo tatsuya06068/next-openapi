@@ -13,7 +13,7 @@ services:
       context: ./container/front/
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "3000:3000" # dev
       - "4010:4010" # prisma
       - "6006:6006" # storybook
     tty: true

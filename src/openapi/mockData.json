@@ -1,0 +1,31 @@
+/app/openapi/openapi.yml
+Error in callback! Tossing to global error handler. TypeError [ERR_INVALID_ARG_TYPE]: The "paths[1]" argument must be of type string. Received undefined
+    at new NodeError (node:internal/errors:405:5)
+    at validateString (node:internal/validators:162:11)
+    at Object.resolve (node:path:1097:7)
+    at /usr/local/lib/node_modules/openapi-mock/node_modules/@openapi-mock/swagger-node-runner/fittings/swagger_router.js:44:17
+    at Array.map (<anonymous>)
+    at create (/usr/local/lib/node_modules/openapi-mock/node_modules/@openapi-mock/swagger-node-runner/fittings/swagger_router.js:43:37)
+    at createFitting (/usr/local/lib/node_modules/openapi-mock/node_modules/bagpipes/lib/fittingTypes/user.js:23:21)
+    at Bagpipes.newFitting (/usr/local/lib/node_modules/openapi-mock/node_modules/bagpipes/lib/bagpipes.js:158:17)
+    at Bagpipes.createFitting (/usr/local/lib/node_modules/openapi-mock/node_modules/bagpipes/lib/bagpipes.js:147:22)
+    at Bagpipes.createPipe (/usr/local/lib/node_modules/openapi-mock/node_modules/bagpipes/lib/bagpipes.js:111:19)
+/usr/local/lib/node_modules/openapi-mock/node_modules/@openapi-mock/swagger-node-runner/index.js:249
+      process.nextTick(function() { throw err; });
+                                    ^
+
+TypeError [ERR_INVALID_ARG_TYPE]: The "paths[1]" argument must be of type string. Received undefined
+    at new NodeError (node:internal/errors:405:5)
+    at validateString (node:internal/validators:162:11)
+    at Object.resolve (node:path:1097:7)
+    at /usr/local/lib/node_modules/openapi-mock/node_modules/@openapi-mock/swagger-node-runner/fittings/swagger_router.js:44:17
+    at Array.map (<anonymous>)
+    at create (/usr/local/lib/node_modules/openapi-mock/node_modules/@openapi-mock/swagger-node-runner/fittings/swagger_router.js:43:37)
+    at createFitting (/usr/local/lib/node_modules/openapi-mock/node_modules/bagpipes/lib/fittingTypes/user.js:23:21)
+    at Bagpipes.newFitting (/usr/local/lib/node_modules/openapi-mock/node_modules/bagpipes/lib/bagpipes.js:158:17)
+    at Bagpipes.createFitting (/usr/local/lib/node_modules/openapi-mock/node_modules/bagpipes/lib/bagpipes.js:147:22)
+    at Bagpipes.createPipe (/usr/local/lib/node_modules/openapi-mock/node_modules/bagpipes/lib/bagpipes.js:111:19) {
+  code: 'ERR_INVALID_ARG_TYPE'
+}
+
+Node.js v18.20.4
