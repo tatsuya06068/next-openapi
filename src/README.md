@@ -85,3 +85,48 @@ page単位のテストページ遷移も含む
 - 統合テスト (Integration Testing)
 
 https://qiita.com/tasty_uni/items/94f463c6c7439f271739
+
+
+
+## todo
+
+- create openapi.yml for `API gateway`
+- add test coding
+    - jest
+    - cypress
+    - storybook test
+
+
+
+
+
+## デプロイ方法
+
+3. CloudFrontディストリビューションの作成
+AWS CloudFrontを使用して、ブルーとグリーンの環境を切り替える設定を行います。
+
+CloudFrontディストリビューションの作成:
+
+AWS CloudFrontコンソールに移動し、「Create Distribution」をクリックします。
+「Web」を選択し、「Origin Domain Name」に現在のブルーバケットのエンドポイントを入力します（例: my-app-blue.s3.amazonaws.com）。
+他の設定を適宜設定し、「Create Distribution」をクリックします。
+カスタムオリジンの追加:
+
+ディストリビューションの設定画面で「Origins and Origin Groups」タブに移動し、「Create Origin」をクリックします。
+新しいオリジンとしてグリーンバケットのエンドポイントを追加します（例: my-app-green.s3.amazonaws.com）。
+
+- S3のバケットを用意
+    - my-app-green
+    - my-app-blue  
+
+- Github Actions
+    - ビルドをしてmy-app-greenにアップロード
+- CodePipelineの設定
+    - ソースステージ
+        - ソースプロバイダーとして「Amazon S3」を選択します。
+        - バケットとして「my-app-green」を選択します。
+    - デプロイステージの設定:
+        - デプロイプロバイダーとして「AWS Lambda」を選択します。
+        - デプロイスクリプトを実行するためのLambda関数を作成します。
+    - Lambda
+        - CloudFrontのオリジンを更新します。
